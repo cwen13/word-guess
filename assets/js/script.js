@@ -1,4 +1,4 @@
-const wordList = ["words","people","letter","numebrs","zones"];
+const wordList = ["words","people","letter","numebrs","zones","variable","array", "modulus", "object", "function", "string", "boolean"];
 
 let startBtn = $(".start-game");
 let resetBtn = $(".reset-game");
@@ -7,11 +7,14 @@ let secretEl = $("#secret-word");
 let winsEl = $("#wins");
 let losesEl = $("#loses");
 
-
-let gameWins, gameLoses;
+let gameWins, gameLosees;
+let win = false;
 let guessedLetters = [];
-let currentWord = "";
+let currentWord = [];
+let secretWord = "";
 let prevWords = [];
+let alphaNumeric = "abcdefghijklmnopqrstuvwxyz0123456789 ".split("");
+let secondsLeft;
 
 /* Need to make a timer and stuff */
 function setTime() {
@@ -20,46 +23,54 @@ function setTime() {
   var timerInterval = setInterval(function() {
     secondsLeft--;
     timeEl.text(secondsLeft);
-    if(secondsLeft === 0) {
+    if(secondsLeft >= 0) {
+      if(win && secondsLeft > 0) {
       // Stops execution of action at set interval
-      clearInterval(timerInterval);
+	clearInterval(timerInterval);
+	winGame();
+      }
     }
-  }, 60000);
+    if (secondsLeft === 0) {
+      clearInterval(timerInterval);
+      loseGame();
+    }
+  }, 1000);
 }
 
-function guessLetter (secretWord, letter) {
+function guessLetter (letter) {
   letter = letter.toLowerCase();
   if (alphaNumeric.indexOf(letter) === -1) {
-    alert("That key is not a letter accepted.");
     return 0;
-  }
-  if (letter !== guessedLetters) {
+  } else {
     for (let i=0; i<secretWord.length; i++) {
-      if (letter === seccretWord[i]) {
+      if (letter === secretWord[i]) {
 	currentWord[i] = letter;
       }
     }
-    return currentWord;
-  } else {
-    // letter guessed has alrayd been guessed
-    alert(`${letter} has already been guessed. Please selecct another.`);
-    return currentWord;
+    return 0;
   }
 }
 
 
 function selectWord(wordList) {
-  let wordIndex = Math.random() % wordList.length;
-  if (wordList[wordIndex]. )
-  
-  return wordList[wordIndex];
+  let wordIndex = Math.round((Math.random()*10000) % wordList.length);
+  if ( secretWord != wordList[wordIndex] ) {
+    secretWord = wordList[wordIndex];
+  } else {
+    secretWord = wordList[wordIndex + 1];
+  }
+  for (let i=0; i<secretWord.length; i++) {
+    currentWord[i] = "_";
+  }
+  return 0;
 }
 
 function winGame() {
   function flashTimer() {
     
   }
-  winsEl.text(parseInt(winEl.text()) + 1);
+  win = true;
+  winsEl.text(parseInt(winsEl.text()) + 1);
   // flash complete word 5 times then select new word
   flashTimer();
   
@@ -67,14 +78,11 @@ function winGame() {
 }
 
 function displayCurrentWord() {
-  let displayWord = [];
-
-  for (character in currentWord.split("")) {
-    displayWord[i] = character;
-  }
-  secretEl.text(displayWord.join(" "));
-
-  if (displayWord.indexOf("_") === -1) {
+  
+  secretEl.text(currentWord.join(" "));
+  
+  if (currentWord.indexOf("_") === -1) {
+    win = true;
     winGame();
   }
   return 0	
@@ -85,19 +93,31 @@ function gameOver() {
   localStoreage.setItem("guessGameLoses", loseEl.text());
   if (window.confirm("Play another round?")) {
     init();
-  } else {
-    // action when user does not want to play another round
   }
   return 0;
 }
 
 function init() {
+
+  gameWins = localStorage.getItems("guessGameWins", 0);
+  gameLoses = localStorage.getItems("guessGameLoses", 0);
+
+  if !(gameWins) {
+    gameWins = 0;
+  }
+  if !(gameLoses) {
+    gameLoses = 0;
+  }
+
+  
+  win = false;
   // start the timer
+  secondsLeft = 10;
+  setTime();
   // selecct secretWord
   selectWord(wordList);
   // display currentWord
   displayCurrentWord();
-
   return 0;
 }
 
@@ -114,11 +134,11 @@ function restart(prevSecretWord) {
 
 startBtn.on("click", init);
 resetBtn.on("click", restart);
-$().on("keypress", (event) => {
-  if (timeLeft === 0) {
+$("*").on("keydown", (event) => {
+  if (secondsLeft === 0) {
     gameOver();
   }
-  guessLetter(sWord, event.key);
+  guessLetter(event.key);
   displayCurrentWord();
   
 });
