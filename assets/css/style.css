@@ -1,0 +1,86 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+main {
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.word-game {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+}
+
+#secret-word {
+  height: 20rem;
+  background-color: yellow;
+}
+
+.wins-loses {
+  background-color: red;
+}
+
+.timer {
+  background-color: purple;
+}
+
+.word-game {
+  width: 75%;
+}
+
+.game-play {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 20rem;
+  width: 25%;
+  align-items: center;
+}
+
+.stats {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.wins-loses {
+  display: flex;
+  flex-direction: column;
+  height: 15rem;
+  width: 62%;
+  justify-content: center;	 
+}
+
+#wins,
+#loses {
+  display: inline;
+}
+
+.reset-button {
+}
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 5rem;
+  width: 100%;
+}
+
+.timer div {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
