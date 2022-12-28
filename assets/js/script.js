@@ -57,7 +57,7 @@ function main(prevWord = "") {
   
   // check if letter was guessed
   // check if letter is in secretWord and update currentWord
-  cWord = = guessLetter(sWord,cWord,letter);
+  cWord = guessLetter(sWord,cWord,letter);
   // display currentWord
   displayCurrentWord(cWord);
   

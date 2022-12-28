@@ -31,7 +31,7 @@
 
   <body>
     <header>
-      <nav class="navbar bg-body-tertiary container-fluid">
+      <nav class="navbar bg-body-tertiary container-fluid d-flex flex-column justifty-content-center align-items-center">
 	<!-- Header with start button -->
 	<h1 class="navbar-brand">
 	  Word Guess Game...Not Worddle
@@ -42,15 +42,15 @@
       </nav>
     </header>
     
-    <main>
-      <section class="word-game">
+    <main class="d-flex flex-row justify-content-center">
+      <section class="word-game d-flex flex-row justify-content-center align-items-center">
 	<section id="secret-word">
 	  SECRET WORD
 	</section>
       </section>
       
-      <section class="game-play">
-	  <section class="wins-loses">
+      <section class="game-play d-flex flex-row flex-wrap justify-content-center align-items-center">
+	  <section class="wins-loses d-flex flex-coulmn justify-content-center align-items-center">
 	    <section class="win">
 	      wins: <div id="wins">0</div>
 	    </section>
@@ -64,8 +64,8 @@
 	    </button>
 	  </section>
 	  
-	  <section class="timer">
-	    <div class="timer-container">
+	  <section class="timer d-flex flex-column justify-content-center align-items-center">
+	    <div class="timer-container d=flex flex-column justify-content-center align-items-center">
 	      Time left (sec): <div id="time">000</div>
 	    </div>
 	</section>
