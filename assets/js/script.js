@@ -66,8 +66,7 @@ function selectWord(wordList) {
   return 0;
 }
 
-function winGame() {
-  
+function winGame() {  
   winsEl.text(parseInt(winsEl.text()) + 1);
   gameOver();
   return 0;
@@ -93,6 +92,7 @@ function gameOver() {
   secretEl.text("SECRET WORD GAME");  
   localStorage.setItem("guessGameWins", winsEl.text());
   localStorage.setItem("guessGameLoses", losesEl.text());
+  currentWord = [];
   return 0;
 }
 

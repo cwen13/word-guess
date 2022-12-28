@@ -29,9 +29,9 @@
     <title>Word Guess</title>
   </head>
 
-  <body>
+  <body class="bg-primary">
     <header>
-      <nav class="navbar bg-body-tertiary container-fluid d-flex flex-column justifty-content-center align-items-center">
+      <nav class="navbar bg-body-tertiary container-fluid d-flex flex-column justifty-content-center align-items-center bg-info">
 	<!-- Header with start button -->
 	<h1 class="navbar-brand">
 	  Word Guess Game...Not Worddle
@@ -43,37 +43,37 @@
     </header>
     
     <main class="d-flex flex-row justify-content-center">
-      <section class="word-game d-flex flex-row justify-content-center align-items-center">
-	<section id="secret-word">
+      <section class="word-game d-flex flex-column align-items-center justify-content-center w-75 border border-info bg-warning text-danger-subtle m-3 border-2">
+	<section id="secret-word" class="fs-1 fw-bold">
 	  SECRET WORD GAME
 	</section>
       </section>
       
-      <section class="game-play d-flex flex-row flex-wrap justify-content-center align-items-center">
-	  <section class="wins-loses d-flex flex-coulmn justify-content-center align-items-center">
+      <section class="game-play d-flex flex-row flex-wrap justify-content-center align-items-center w-25">
+	  <section class="wins-loses d-flex flex-row flex-wrap justify-content-center align-items-center m-3 border border-info border-2">
 	    <section class="win">
-	      wins: <div id="wins">0</div>
+	      <h2> Wins: <div id="wins" class="d-inline">0</div></h2>
 	    </section>
-	    <section class="lose">
-	      loses: <div id="loses">0</div>
-	    </section>
-	  </section>	  
-	  <section class="reset-button">
+
+	    <section class="reset-button">
 	    <button class="reset-game btn btn-secondary" type="button">
 	      Reset
 	    </button>
 	  </section>
+	  <section class="lose">
+	     <h2> Loses: <div id="loses"  class="d-inline">0</div></h2>
+	    </section>
+	  </section>	  
 	  
-	  <section class="timer d-flex flex-column justify-content-center align-items-center">
-	    <div class="timer-container d=flex flex-column justify-content-center align-items-center">
-	      Time left (sec): <div id="time">000</div>
-
-	    </div>
-	</section>
       </section>
+
     </main>
-    <footer>
+    <footer class="bg-primary">
       <!-- put flavicon for gihub -->
+      <section class="timer d-flex flex-column justify-content-center align-items-center w-100 border-top border-bottom border-white border-4">
+	<h3> Time left (sec): <div id="time">000</div></h3>
+      </section>
+
     </footer>
     <script src="./assets/js/script.js"></script>
   </body>

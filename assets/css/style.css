@@ -1,4 +1,8 @@
 
+.wordgame {
+  height: 20rem;
+}
+
 .wins-loses {
   background-color: red;
 }
@@ -7,31 +11,17 @@
   background-color: purple;
 }
 
-.word-game {
-  width: 75%;
-}
 
 .game-play {
   height: 20rem;
-  width: 25%;
 }
 
 .wins-loses {
   height: 15rem;
   width: 62%;
-
 }
 
 .timer {
   height: 5rem;
-  width: 100%;
-}
-#wins,
-#loses {
-  display: inline;
 }
 
-#secret-word {
-  height: 20rem;
-  background-color: yellow;
-}
