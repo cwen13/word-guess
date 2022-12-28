@@ -20,17 +20,19 @@ function setTime() {
     // Sets interval in variable
     // setInterval (function(),<time-for-interval-in-milliseconds>);
   var timerInterval = setInterval(function() {
-    secondsLeft--;
-    timeEl.text(secondsLeft);
+    timeEl.text(secondsLeft--);
+//    secondsLeft--;
     if(secondsLeft >= 0) {
       if(win && secondsLeft > 0) {
       // Stops execution of action at set interval
 	clearInterval(timerInterval);
+	    timeEl.text(00);
 	winGame();
       }
     }
     if (secondsLeft === 0) {
       clearInterval(timerInterval);
+      timeEl.text(00);
       loseGame();
     }
   }, 1000);
@@ -65,24 +67,23 @@ function selectWord(wordList) {
 }
 
 function winGame() {
-  win = true;
+  
   winsEl.text(parseInt(winsEl.text()) + 1);
   gameOver();
+  return 0;
 }
 
 function loseGame() {
   win = false;
   losesEl.text(parseInt(losesEl.text()) + 1);
   gameOver();
+  return 0;
 }
 
 function displayCurrentWord() {
-  
-  secretEl.text(currentWord.join(" "));
-  
+  secretEl.text(currentWord.join(" ")); 
   if (currentWord.indexOf("_") === -1) {
     win = true;
-    winGame();
   }
   return 0	
 }
@@ -122,10 +123,12 @@ function reset(prevSecretWord) {
   // select new secret word
   // reset timer
   gameWins = 0;
-  gameLoses = 0;
   localStorage.setItem("guessGameWins", gameWins);
+  winsEl.text(gameWins);
+  gameLoses = 0;
   localStorage.setItem("guessGameLoses", gameLoses);
-  init();
+  losesEl.text(gameLoses);
+  secretEl.text("SECRET WORD GAME");    
 }
 
 
