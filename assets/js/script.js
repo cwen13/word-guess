@@ -1,4 +1,4 @@
-const wordList = ["words","people","letter","numebrs","zones","variable","array", "modulus", "object", "function", "string", "boolean"];
+const wordList = ["words","people","letter","numbers","zones","variable","array", "modulus", "object", "function", "string", "boolean"];
 
 let startBtn = $(".start-game");
 let resetBtn = $(".reset-game");
@@ -16,7 +16,6 @@ let prevWords = [];
 let alphaNumeric = "abcdefghijklmnopqrstuvwxyz0123456789 ".split("");
 let secondsLeft;
 
-/* Need to make a timer and stuff */
 function setTime() {
     // Sets interval in variable
     // setInterval (function(),<time-for-interval-in-milliseconds>);
@@ -66,15 +65,15 @@ function selectWord(wordList) {
 }
 
 function winGame() {
-  function flashTimer() {
-    
-  }
   win = true;
   winsEl.text(parseInt(winsEl.text()) + 1);
-  // flash complete word 5 times then select new word
-  flashTimer();
-  
-  selectWord(wordList);  
+  gameOver();
+}
+
+function loseGame() {
+  win = false;
+  losesEl.text(parseInt(losesEl.text()) + 1);
+  gameOver();
 }
 
 function displayCurrentWord() {
@@ -89,27 +88,25 @@ function displayCurrentWord() {
 }
 
 function gameOver() {
-  localStoreage.setItem("guessGameWins", winEl.text());
-  localStoreage.setItem("guessGameLoses", loseEl.text());
-  if (window.confirm("Play another round?")) {
-    init();
-  }
+  startBtn.disabled = false;
+  secretEl.text("SECRET WORD GAME");  
+  localStorage.setItem("guessGameWins", winsEl.text());
+  localStorage.setItem("guessGameLoses", losesEl.text());
   return 0;
 }
 
 function init() {
 
-  gameWins = localStorage.getItems("guessGameWins", 0);
-  gameLoses = localStorage.getItems("guessGameLoses", 0);
-
-  if !(gameWins) {
+  gameWins = localStorage.getItem("guessGameWins");
+  if (!gameWins) {
     gameWins = 0;
   }
-  if !(gameLoses) {
+
+  gameLoses = localStorage.getItem("guessGameLoses");
+  if (!gameLoses) {
     gameLoses = 0;
   }
-
-  
+  startBtn.disabled = true;
   win = false;
   // start the timer
   secondsLeft = 10;
@@ -121,23 +118,20 @@ function init() {
   return 0;
 }
 
-function restart(prevSecretWord) {
+function reset(prevSecretWord) {
   // select new secret word
   // reset timer
   gameWins = 0;
   gameLoses = 0;
-  localStorage.setItems("guessGameWins", 0);
-  localStorage.setItems("guessGameLoses", 0);
-  init(selectWord(wordList, prevSecretWord));
+  localStorage.setItem("guessGameWins", gameWins);
+  localStorage.setItem("guessGameLoses", gameLoses);
+  init();
 }
 
 
 startBtn.on("click", init);
-resetBtn.on("click", restart);
+resetBtn.on("click", reset);
 $("*").on("keydown", (event) => {
-  if (secondsLeft === 0) {
-    gameOver();
-  }
   guessLetter(event.key);
   displayCurrentWord();
   
